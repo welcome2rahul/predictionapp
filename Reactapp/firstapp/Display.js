@@ -1,14 +1,23 @@
 import React ,{useState} from 'react';
 import { StyleSheet, View ,Text } from 'react-native';
 
-const Display = ()=>{
-    return(
-    <View style={styles.container} >
-        <Text>Percent</Text>
-        <Text>Result</Text>
+const Display = (prop)=>{
 
-    </View>
-    )}
+    if (prop.data=="Loading"){
+        return <Text>Calculating</Text>
+        
+    }else{
+        return(
+         
+            <View style={styles.container} >
+                <View style={styles.main}>
+                <Text style={styles.text}>{prop.data.percentage}</Text>
+                <Text style={styles.text}>{prop.data.result}</Text>
+                </View>
+            </View>
+            )
+    }
+    }
 
 export default Display;
 
@@ -19,5 +28,14 @@ const styles = StyleSheet.create({
       
       
     },
+    text: {
+        
+        textAlign: 'center',
+        fontSize : 20,
+    },
+    main : {
+        borderWidth : 1,
+        borderRadius : 5,
+    }
   });
   

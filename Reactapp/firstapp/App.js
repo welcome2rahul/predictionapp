@@ -27,16 +27,18 @@ export default function App() {
 
   const [fname, setFname] = useState('');
   const [sname, setSname] = useState('');
+  const [result, setResult] = useState('');
 
   const sub = ()=>{
-    fetch("https://love-calculator.p.rapidapi.com/getPercentage",{
+    fetch(`https://love-calculator.p.rapidapi.com/getPercentage?fname=${fname}&sname=${sname}`,{
       headers:{
-        "x-rapidapi-key": "a06f6d8f5fmsh777718c069259ffp1d5711jsn2b7ea502d859",
-        "x-rapidapi-host": "love-calculator.p.rapidapi.com","useQueryString": true
+        "x-rapidapi-host": "love-calculator.p.rapidapi.com",
+        "x-rapidapi-key": "a06f6d8f5fmsh777718c069259ffp1d5711jsn2b7ea502d859"
       }
     }).then(data=>data.json())
       .then(data2=>{
         console.log(data2)
+        setResult(data2)
       })
     }
 
@@ -50,18 +52,18 @@ export default function App() {
     <TextInput
       label="First Person"
       value={fname}
-      onChangeText={text => setFname(text)}
+      onChangeText={fname => setFname(fname)}
     />
     <TextInput
       label="Second Person"
       value={sname}
-      onChangeText={text => setSname(text)}
+      onChangeText={sname => setSname(sname)}
     />
 
-<Button style={{margin:10}} icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+<Button style={{margin:10}} icon="camera" mode="contained" onPress={()=>sub()}>
     Calculate
   </Button>
-  <Display/>
+  <Display data={result}/>
       <StatusBar style="auto" />
     </View>
   );
