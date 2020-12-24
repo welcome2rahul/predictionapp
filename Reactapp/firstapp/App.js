@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React ,{useState} from 'react';
 import { StyleSheet, View  } from 'react-native';
 import { Appbar ,TextInput , Button } from 'react-native-paper';
-
+import Display from './Display';
 // const Info = (props)=> {
 //   return(
 //     <View>
@@ -28,6 +28,19 @@ export default function App() {
   const [fname, setFname] = useState('');
   const [sname, setSname] = useState('');
 
+  const sub = ()=>{
+    fetch("https://love-calculator.p.rapidapi.com/getPercentage",{
+      headers:{
+        "x-rapidapi-key": "a06f6d8f5fmsh777718c069259ffp1d5711jsn2b7ea502d859",
+        "x-rapidapi-host": "love-calculator.p.rapidapi.com","useQueryString": true
+      }
+    }).then(data=>data.json())
+      .then(data2=>{
+        console.log(data2)
+      })
+    }
+
+
   return (
     <View style={styles.container}>
        <Appbar.Header>
@@ -45,9 +58,10 @@ export default function App() {
       onChangeText={text => setSname(text)}
     />
 
-<Button style={{margin:10}} icon="roll" mode="contained" onPress={() => console.log('Pressed')}>
+<Button style={{margin:10}} icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
     Calculate
   </Button>
+  <Display/>
       <StatusBar style="auto" />
     </View>
   );
